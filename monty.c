@@ -3,7 +3,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-char **op_toks = NULL
+char **op_toks = NULL;
 
 /**
  * main - gateway into the monty interpreter
@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return (use_err());
 
-	file_fd = fopen(argv[1], 'r');
+	file_fd = fopen(argv[1], "r");
 	if (file_fd == NULL)
 		return (fopen_err(argv[1]));
 	tmnt = run_monty(file_fd);

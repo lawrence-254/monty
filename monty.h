@@ -44,4 +44,81 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**err1.c
+ */
+int use_err(void);
+int malloc_err(void);
+int fopen_err(char *filename);
+int instr_err(char *opcode, unsigned int err_line);
+int push_arg_err(unsigned int err_line);
+/**
+ * err2.c
+ */
+int pop_err(unsigned int err_line);
+int show_empty_err(unsigned int err_line);
+int math_stack_err(unsigned int err_line, char *cm);
+int div_err(unsigned int err_line);
+int char_err(unsigned int err_line, char *m);
+/**
+ * fun1.c
+ */
+void f_push(stack_t **stack, unsigned int in_line_num);
+void f_pall(stack_t **stack, unsigned int in_line_num);
+void f_pint(stack_t **stack, unsigned int in_line_num);
+void f_pop(stack_t **stack, unsigned int in_line_num);
+void f_swap(stack_t **stack, unsigned int in_line_num);
+/**
+ * fun2.c
+ */
+void f_add(stack_t **stack, unsigned int in_line_num);
+void f_sub(stack_t **stack, unsigned int in_line_num);
+void f_mul(stack_t **stack, unsigned int in_line_num);
+void f_div(stack_t **stack, unsigned int in_line_num);
+void f_mod(stack_t **stack, unsigned int in_line_num);
+/**
+ * fun3.c
+ */
+void f_nop(stack_t **stack, unsigned int in_line_num);
+void f_pchar(stack_t **stack, unsigned int in_line_num);
+void f_pstr(stack_t **stack, unsigned int in_line_num);
+/**
+ * fun4.c
+ */
+void f_queue(stack_t **stack, unsigned int in_line_num);
+void f_rotl(stack_t **stack, unsigned int in_line_num);
+void f_rotr(stack_t **stack, unsigned int in_line_num);
+void f_stack(stack_t **stack, unsigned int in_line_num);
+/**
+ * run_monty.c
+ */
+void (*get_op_func(char *opcode))(stack_t**, unsigned int);
+int run_monty(FILE *file_fd);
+void free_tkn(void);
+unsigned int get_tok_arr_len(void);
+int is_line_mty(char *line, char *delims);
+/**
+ * set_op_tok_error
+ */
+void set_op_tok_error(int error_code);
+/**
+ * stack.c
+ */
+void free_stack(stack_t  **stack);
+int check_mode(stack_t  **stack);
+int init_stack(stack_t  **stack);
+/**
+ * strfun2.c
+ */
+int is_delim(char ch, char *delims);
+char **strtow(char *str, char *delims);
+int get_word_count(char *str, char *delims);
+char *get_next_word(char *str, char *delims);
+int get_word_length(char *str, char *delims);
+/**
+ * str_fun.c
+ */
+void num_base_mem(unsigned int num, unsigned int base, char *mem, int mem_sze);
+char *get_int(int num);
+unsigned int _abs(int i);
+int num_base_len(unsigned int num, unsigned int base);
 #endif

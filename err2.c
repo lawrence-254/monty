@@ -54,6 +54,6 @@ int div_err(unsigned int err_line)
  */
 int char_err(unsigned int err_line, char *m)
 {
-	fprintf(stderr, "L%u: Unable to print char%s\n", err_line, cm);
+	fprintf(stderr, "L%u: Unable to print char%s\n", err_line, m);
 	return (EXIT_FAILURE);
 }

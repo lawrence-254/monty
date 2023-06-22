@@ -21,12 +21,14 @@ void f_pchar(stack_t **stack, unsigned int in_line_num)
 {
 	if ((*stack)->next == NULL)
 	{
-		set_op_tok_error(char_err(in_line_num, "stack empty"));
+		set_op_tok_error(char_err(in_line_num,
+					"can't pchar, stack empty"));
 		return;
 	}
 	if ((*stack)->next->n < 0 || (*stack)->next->n > 127)
 	{
-		set_op_tok_error(char_err(in_line_num, "value out of range"));
+		set_op_tok_error(char_err(in_line_num,
+					"can't pchar, value out of range"));
 		return;
 	}
 	printf("%c\n", (*stack)->next->n);

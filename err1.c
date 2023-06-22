@@ -30,7 +30,7 @@ int malloc_err(void)
  */
 int fopen_err(char *filename)
 {
-	fprintf(stderr, "Error: file cannot be opened\n");
+	fprintf(stderr, "Error: can't open file %s\n", filename);
 	return (EXIT_FAILURE);
 }
 /**

@@ -61,7 +61,7 @@ int is_line_mty(char *line, char *delims)
  */
 void (*get_op_func(char *opcode))(stack_t**, unsigned int)
 {
-	instruct_t op_funcs[] = {
+	instruction_t op_funcs[] = {
 		{"push", f_push},
 		{"pall", f_pall},
 		{"pint", f_pint},
@@ -104,24 +104,24 @@ int run_monty(FILE *file_fd)
 	
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	while (getline(&line, &len, file_fd) != -1)
+	while (get_int(&line, &len, file_fd) != -1)
 	{
 		in_line_num++;
 		op_toks = strtow(line, DELIMS);
 		if (op_toks == NULL)
 		{
-			if (id_line_mty(line,DELIMS))
+			if (is_line_mty(line,DELIMS))
 				continue;
 			free_stack(&stack);
 			return (malloc_err());
 		}
-		else if (op_toks[0][0] == "#")
+		else if (op_toks[0][0] == '#')
 		{
 			free_tkn();
 			continue;
 		}
 		op_func = get_op_func(op_toks[0]);
-		if (op_func = NULL)
+		if (op_func == NULL)
 		{
 			free_stack(&stack);
 			exit_status = instr_err(op_toks[0], in_line_num);
