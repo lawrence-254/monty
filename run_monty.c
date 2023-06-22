@@ -1,6 +1,10 @@
 #include "monty.h"
 #include <string.h>
-
+void (*get_op_func(char *opcode))(stack_t**, unsigned int);
+int run_monty(FILE *file_fd);
+void free_tkn(void);
+unsigned int get_tok_arr_len(void);
+int is_line_mty(char *line, char *delims);
 /**
  * free_tkn - clears global token array
  */
@@ -108,4 +112,41 @@ int run_monty(FILE *file_fd)
 		{
 			if (id_line_mty(line,DELIMS))
 				continue;
-
+			free_stack(&stack);
+			return (malloc_err());
+		}
+		else if (op_toks[0][0] == "#")
+		{
+			free_tkn();
+			continue;
+		}
+		op_func = get_op_func(op_toks[0]);
+		if (op_func = NULL)
+		{
+			free_stack(&stack);
+			exit_status = instr_err(op_toks[0], in_line_num);
+			free_tkn();
+			break;
+		}
+		prev_tok_len = get_tok_arr_len();
+		op_func(&stack, in_line_num);
+		if (get_tok_arr_len() != prev_tok_len)
+		{
+			if (op_toks && op_toks[prev_tok_len])
+				exit_status = atoi(op_toks[prev_tok_len]);
+			else
+				exit_status = EXIT_FAILURE;
+			free_tkn();
+			break;
+		}
+		free_tkn();
+	}
+	free_stack(&stack);
+	if (line && *line == 0)
+	{
+		free(line);
+		return (malloc_err());
+	}
+	free(line);
+	return (exit_status);
+}
