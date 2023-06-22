@@ -1,15 +1,18 @@
+#include "monty.h"
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 void num_base_mem(unsigned int num, unsigned int base, char *mem, int mem_sze);
-char *get_int(int num);
+char *parse_int(int num);
 unsigned int _abs(int i);
 int num_base_len(unsigned int num, unsigned int base);
-
+char *read_line(FILE* file_fd);
 /**
- * get_int - gets char pointer to a string with int
+ * parse_int - gets char pointer to a string with int
  * @num: number to change to str
  * Return: NULL if malloc fails or pointer
  */
-char *get_int(int num)
+char *parse_int(int num)
 {
 	unsigned int temp;
 	int len = 0;
@@ -17,14 +20,14 @@ char *get_int(int num)
 	char *res;
 
 	temp = _abs(num);
-	len = num_base_len(tem, 10);
+	len = num_base_len(temp, 10);
 
 	if (num < 0 || n_1 < 0)
 		len++;
 	res = malloc(len + 1);
 	if (!res)
 		return (NULL);
-	num_base_mem(tem, 10, res, len);
+	num_base_mem(temp, 10, res, len);
 	if (num < 0 || n_1 < 0)
 		res[0] = '-';
 	return (res);
@@ -38,7 +41,7 @@ unsigned int _abs(int i)
 {
 	if (i < 0)
 		return (-(unsigned int)i);
-	return (unsigned int i);
+	return ((unsigned int)i);
 }
 /**
  * num_base_len - gets len  of mem needed for unsigned int
@@ -78,6 +81,27 @@ void num_base_mem(unsigned int num, unsigned int base, char *mem, int mem_sze)
 		else
 			mem[i] = res + 0;
 		num /= base;
-		1--;
+		i--;
 	}
+}
+/**
+ * read_line - Read a line from a file
+ * @file_fd: The file to read from
+ * Return: The read line  or NULL on failure or end of file
+ */
+char *read_line(FILE *file_fd)
+{
+	char *line = NULL;
+	size_t len = 0, line_len;
+
+	if (fgets(line, len, file_fd) == NULL)
+	{
+		free(line);
+		return (NULL);
+	}
+	line_len = strlen(line);
+	if (line[line_len - 1] == '\n')
+		line[line_len - 1] = '\0';
+
+	return (line);
 }

@@ -118,7 +118,8 @@ int get_word_length(char *str, char *delims);
  * str_fun.c
  */
 void num_base_mem(unsigned int num, unsigned int base, char *mem, int mem_sze);
-char *get_int(int num);
+char *parse_int(int num);
 unsigned int _abs(int i);
 int num_base_len(unsigned int num, unsigned int base);
+char *read_line(FILE* file_fd);
 #endif

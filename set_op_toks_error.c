@@ -20,7 +20,7 @@ void set_op_tok_error(int error_code)
 		n_toks[i] = op_toks[i];
 		i++;
 	}
-	e_str = get_int(error_code);
+	e_str = parse_int(error_code);
 	if (!e_str)
 	{
 		free(n_toks);

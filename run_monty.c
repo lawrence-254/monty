@@ -1,5 +1,7 @@
 #include "monty.h"
+#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 void (*get_op_func(char *opcode))(stack_t**, unsigned int);
 int run_monty(FILE *file_fd);
 void free_tkn(void);
@@ -99,12 +101,14 @@ int run_monty(FILE *file_fd)
 	char *line = NULL;
 	stack_t *stack = NULL;
 	void (*op_func)(stack_t**, unsigned int);
-	size_t len = 0, exit_status = EXIT_SUCCESS;
+	size_t exit_status = EXIT_SUCCESS;
 	unsigned int in_line_num = 0, prev_tok_len = 0;
 	
+	line = malloc(sizeof(char) * 1024);
+
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	while (get_int(&line, &len, file_fd) != -1)
+	while ((line = read_line(file_fd)) != NULL)
 	{
 		in_line_num++;
 		op_toks = strtow(line, DELIMS);
@@ -140,6 +144,7 @@ int run_monty(FILE *file_fd)
 			break;
 		}
 		free_tkn();
+		free(line);
 	}
 	free_stack(&stack);
 	if (line && *line == 0)

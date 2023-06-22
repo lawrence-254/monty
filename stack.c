@@ -9,7 +9,7 @@ int init_stack(stack_t  **stack);
  */
 void free_stack(stack_t  **stack)
 {
-	stack_t temp = *stack;
+	stack_t *temp = *stack;
 
 	while (*stack)
 	{
@@ -45,9 +45,9 @@ int init_stack(stack_t  **stack)
  */
 int check_mode(stack_t  **stack)
 {
-	if (stack->n == QUEUE)
+	if ((*stack)->n == QUEUE)
 		return (QUEUE);
-	else if (stack-> == STACK)
+	else if ((*stack)->n == STACK)
 		return (STACK);
 	return (2);
 }
